@@ -9,25 +9,46 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-      console.log(selectedDates[0]);
-      console.log(this.defaultDate);
-      if (selectedDates[0] > this.defaultDate) {
-          userSelectedDate = selectedDates[0];
-      }
+      if (selectedDates[0] > options.defaultDate) {
+        userSelectedDate = selectedDates[0];
+        startButton.disabled = false;
+    }
+      else {
+        window.alert("Please choose a date in the future");
+        startButton.disabled = true;
+    }
   },
 };
 
 //після валідації в методі onClose() на минуле/майбутнє запиши обрану дату в цю let змінну
 let userSelectedDate;
+const startButton = document.querySelector("button");
 
-/*Якщо користувач вибрав дату в минулому, покажи window.alert() з текстом "Please choose a date in the future" 
-і зроби кнопку «Start» не активною.*/
+startButton.addEventListener("click", function () {
+  //кнопки start & input стають неактивними
+  startButton.disabled = true;
+  let countdown = convertMs(userSelectedDate);
+  console.log(countdown);
+});
 
-/*
-Якщо користувач вибрав валідну дату (в майбутньому), кнопка «Start» стає активною.
-Кнопка «Start» повинна бути неактивною доти, доки користувач не вибрав дату в майбутньому. Зверни увагу, що при обранні валідної дати, не запуску таймера і обранні потім невалідної дати, кнопка після розблокування має знову стати неактивною.
-Натисканням на кнопку «Start» починається зворотний відлік часу до обраної дати з моменту натискання. */
 
-////// const calendar = document.querySelector("#datetime-picker");
+flatpickr("#datetime-picker", options);
 
-flatpickr("#datetime-picker",options);
+function convertMs(ms) {
+  // Number of milliseconds per unit of time
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  // Remaining days
+  const days = Math.floor(ms / day);
+  // Remaining hours
+  const hours = Math.floor((ms % day) / hour);
+  // Remaining minutes
+  const minutes = Math.floor(((ms % day) % hour) / minute);
+  // Remaining seconds
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+
+  return { days, hours, minutes, seconds };
+}
