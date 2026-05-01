@@ -3,14 +3,25 @@ import flatpickr from "flatpickr";
 // Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css";
 
+let userSelectedDate;
+const startButton = document.querySelector("button");
+startButton.disabled = true;
+  
+startButton.addEventListener("click", function () {
+  //кнопки start & input стають неактивними
+  //console.log(userSelectedDate);
+  let time = userSelectedDate - Date.now();
+  let countdown = convertMs(time);
+});
+
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-      if (selectedDates[0] > options.defaultDate) {
-        userSelectedDate = selectedDates[0];
+      if (selectedDates[0] > Date.now()) {
+        userSelectedDate = selectedDates[0].getTime();
         startButton.disabled = false;
     }
       else {
@@ -20,18 +31,6 @@ const options = {
   },
 };
 
-//після валідації в методі onClose() на минуле/майбутнє запиши обрану дату в цю let змінну
-let userSelectedDate;
-const startButton = document.querySelector("button");
-
-startButton.addEventListener("click", function () {
-  //кнопки start & input стають неактивними
-  startButton.disabled = true;
-  let countdown = convertMs(userSelectedDate);
-  console.log(countdown);
-});
-
-
 flatpickr("#datetime-picker", options);
 
 function convertMs(ms) {
@@ -40,7 +39,6 @@ function convertMs(ms) {
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
-
   // Remaining days
   const days = Math.floor(ms / day);
   // Remaining hours
@@ -49,6 +47,8 @@ function convertMs(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
+  
+  console.log(`seconds:${seconds}; minutes:${minutes}; hours:${hours}; days: ${days}`);
+  
   return { days, hours, minutes, seconds };
 }
