@@ -48,7 +48,6 @@ const options = {
         startButton.disabled = false;
     }
       else {
-        // window.alert("Please choose a date in the future");
         iziToast.error({
           
           message: 'Please choose a date in the future',

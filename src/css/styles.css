@@ -111,3 +111,92 @@ button[data-start]:disabled {
   text-transform: uppercase;
   display:block;
 }
+/* ---------------------------------------------------- */
+.form{
+  display: flex;
+  flex-direction: column;
+  row-gap: 23px;
+}
+
+fieldset{
+  display: flex;
+  flex-direction: row;
+  width: 360px;
+  height: 64px;
+  padding-top: 0px;
+  padding-left: 24px;
+  justify-content: space-around;
+  border-radius: 4px;
+}
+
+fieldset > label{
+  line-height: 1.5;
+  /*16/24=1.5*/
+  letter-spacing: 0%;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+fieldset > legend{
+  line-height: 1.5;
+  /*16/24=1.5*/
+  letter-spacing: 0%;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+.form > label > input{
+  border: 1px solid #808080;
+  width: 360px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.form > label >input:hover, fieldset:hover{
+  border: 1px solid #000000;
+}
+
+.form > label > input:active{
+  background-color: #4E75FF;
+}
+
+.form > label{
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  line-height: 1.5;
+  /*16/24=1.5*/
+  letter-spacing: 0%;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+.form > button{
+  width: 360px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  color:#FFFFFF;
+  background-color: #4E75FF;
+  line-height: 1.5;
+  /*16/24=1.5*/
+  letter-spacing: 0%;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+.form > button:hover{
+  background-color: #6C8CFF;
+}
