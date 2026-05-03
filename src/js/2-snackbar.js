@@ -5,7 +5,7 @@ import "izitoast/dist/css/iziToast.min.css";
 
 const form = document.querySelector(".form");
 
-form.addEventListener("submit", function () {
+form.addEventListener("submit", function (event) {
     event.preventDefault();
     
     //яке число ввів користувач?
@@ -16,21 +16,21 @@ form.addEventListener("submit", function () {
     setTimeout(() => {
         new Promise((resolve, reject) => {
         if (state === "fulfilled") {
-            resolve(`✅ Fulfilled promise in ${delay}ms`);
+            resolve(delay);
         } else {
-            reject(`❌ Rejected promise in ${delay}ms`);   
+            reject(delay);   
         }
         })
             .then((data) => { 
                 iziToast.success({
-                    message: data,
+                    message: `✅ Fulfilled promise in ${data}ms`,
                     position: 'topRight', 
                     balloon: true,
                 });
             })
             .catch((error) => { 
                 iziToast.error({
-                    message: error,
+                    message: `❌ Rejected promise in ${error}ms`,
                     position: 'topRight', 
                     balloon: true,
                 });
