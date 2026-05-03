@@ -3,15 +3,38 @@ import flatpickr from "flatpickr";
 // Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css";
 
+// Описаний у документації
+import iziToast from "izitoast";
+// Додатковий імпорт стилів
+import "izitoast/dist/css/iziToast.min.css";
+
 let userSelectedDate;
-const startButton = document.querySelector("button");
+const startButton = document.querySelector("button[data-start]");
+const calendar = document.querySelector("#datetime-picker");
 startButton.disabled = true;
-  
+
+const timerDays = document.querySelector('span[data-days]');
+const timerHours = document.querySelector('span[data-hours]');
+const timerMinutes = document.querySelector('span[data-minutes]');
+const timerSeconds = document.querySelector('span[data-seconds]');
+
+let intervalId = null;
+
 startButton.addEventListener("click", function () {
   //кнопки start & input стають неактивними
-  //console.log(userSelectedDate);
-  let time = userSelectedDate - Date.now();
-  let countdown = convertMs(time);
+  startButton.disabled = true;
+  calendar.disabled = true;
+  
+  intervalId = setInterval(() => {
+    const time = userSelectedDate - Date.now();
+    if (time <= 0) {
+      clearInterval(intervalId);
+      calendar.disabled = false;
+      return
+    }
+    const countdown = convertMs(time);
+    populateTime(countdown);
+  }, 1000);
 });
 
 const options = {
@@ -25,13 +48,19 @@ const options = {
         startButton.disabled = false;
     }
       else {
-        window.alert("Please choose a date in the future");
+        // window.alert("Please choose a date in the future");
+        iziToast.error({
+          
+          message: 'Please choose a date in the future',
+          position: 'topRight', 
+          balloon: true,
+        });
         startButton.disabled = true;
     }
   },
 };
 
-flatpickr("#datetime-picker", options);
+flatpickr(calendar, options);
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
@@ -47,8 +76,13 @@ function convertMs(ms) {
   const minutes = Math.floor(((ms % day) % hour) / minute);
   // Remaining seconds
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-  
-  console.log(`seconds:${seconds}; minutes:${minutes}; hours:${hours}; days: ${days}`);
-  
+
   return { days, hours, minutes, seconds };
+}
+
+function populateTime({ days, hours, minutes, seconds }) {
+  timerDays.innerHTML = String(days).padStart(2, "0");
+  timerHours.innerHTML = String(hours).padStart(2, "0");
+  timerMinutes.innerHTML = String(minutes).padStart(2, "0");
+  timerSeconds.innerHTML = String(seconds).padStart(2, "0");
 }

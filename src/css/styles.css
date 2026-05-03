@@ -17,5 +17,97 @@
 @import url('./back-link.css');
 @import url('./footer.css');
 
+#datetime-picker{
+  width: 272px;
+  height: 40px;
+  border: solid 1px #808080;
+  border-radius:  4px;
+  padding-left: 15px;
+  color: #2E2F42;
+  line-height: 1.5;/*16/24=1.5*/
+  letter-spacing: 4%;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  margin-bottom: 16px;
+  margin-right: 8px;
+}
 
+#datetime-picker:hover{
+  border: solid 1px #000000;
+}
 
+#datetime-picker:active {
+  border: solid 1px #4E75FF;
+}
+
+#datetime-picker:disabled {
+  border: solid 1px #808080;
+  color:#808080;
+}
+
+button[data-start]{
+  background-color: #4E75FF;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 75px;
+  height: 40px;
+  color: #FFFFFF;
+  line-height: 1.5;    /*16/24=1.5*/
+  letter-spacing: 4%;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+button[data-start]:hover {
+  background-color: #6C8CFF;
+}
+
+button[data-start]:disabled {
+  color: #989898;
+  background-color: #CFCFCF;
+}
+
+.timer{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 24px;
+  margin-top: 16px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.value{
+  color:#2E2F42;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  letter-spacing: 4%;
+  line-height: 0.83; /*40/48=0.83*/
+}
+
+.label{
+  color: #2E2F42;
+  line-height: 1.5;  /*16/24=1.5*/
+  letter-spacing: 0%;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  text-transform: uppercase;
+  display:block;
+}
